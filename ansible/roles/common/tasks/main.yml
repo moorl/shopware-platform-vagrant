@@ -25,12 +25,44 @@
     repo: 'deb https://deb.nodesource.com/node_12.x {{ ansible_distribution_release }} main' 
     update_cache: yes
 
-- name: install packages required for shopware.dev setup
+- name: install packages required for shopware.dev setup 1
+  become: yes
+  apt:
+    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'mysql-server']
+    state: latest
+
+- name: install packages required for shopware.dev setup 2
   become: yes
   apt: 
-    pkg: ['sudo', 'git', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'php', 'libapache2-mod-php', 'php-cli', 'mysql-server', 'python-mysqldb', 'nodejs', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
+    pkg: ['python-mysqldb', 'nodejs', 'chromium-browser', 'default-jre-headless', 'docker.io', 'docker-compose']
     state: latest
-    
+
+- name: sudo apt -y install software-properties-common
+  become: yes
+  apt:
+    pkg: ['software-properties-common']
+    state: present
+
+- name: add-apt-repository ppa:ondrej/php
+  become: yes
+  apt_repository:
+    repo: ppa:ondrej/php
+    state: present
+    update_cache: yes
+
+- name: sudo apt -y install php7.4
+  become: yes
+  apt:
+    pkg: ['php7.4','php7.4-cli','libapache2-mod-php7.4']
+    state: present
+
+- name: install php extensions
+  become: yes
+  apt:
+    pkg: ['php7.4-gd', 'php7.4-intl', 'php7.4-iconv', 'php7.4-mbstring', 'php7.4-mysql', 'php7.4-xml', 'php7.4-zip', 'php7.4-json', 'php7.4-curl']
+    state: present
+
+
 - name: Download and install Composer
   shell: curl -sS https://getcomposer.org/installer | php
   args:
@@ -48,12 +80,6 @@
     src: /usr/src/composer.phar
     remote_src: yes
   become: yes
-
-- name: install php extensions
-  become: yes
-  apt:
-    pkg: ['php-gd', 'php-intl', 'php-iconv', 'php-mbstring', 'php-mysql', 'php-xml', 'php-zip', 'php-json', 'php-curl']
-    state: latest
 
 - name: add vagrant user to docker group
   user:

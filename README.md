@@ -79,14 +79,14 @@ you will find the following options and be able to modify them accordingly.
 | Variable       | Type             | Default               | Description                                                            |
 |----------------|------------------|-----------------------|------------------------------------------------------------------------|
 | proxy_enabled  | Boolean (yes/no) | no                    | Enables the installation of nginx as a reverse proxy                   |
-| proxy_hostname | Hostname         | "shopware.local"      | Defines the hostname that will be used to access the Shopware instance |
+| proxy_hostname | Hostname         | "shopware640.local"      | Defines the hostname that will be used to access the Shopware instance |
 | proxy_ssl      | Boolean (yes/no) | no                    | Enables SSL                                                            |
 
 Please notice that you will have to modify your hosts file or use the Vagrant Hostsupdater plugin,
 when using a reverse proxy setup.
 
 Given the hosts entry is set, you can access the Shopware instance via `https://<proxy_hostname>`, whereas
-`<proxy_hostname>` is a placeholder for the configured hostname (shopware.local per default).
+`<proxy_hostname>` is a placeholder for the configured hostname (shopware640.local per default).
 
 ---
 

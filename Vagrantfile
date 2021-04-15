@@ -13,9 +13,9 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", ip: "192.168.33.10"
     config.ssh.insert_key = false
 
-    config.vm.hostname = "shopware.local"
+    config.vm.hostname = "shopware640.local"
     config.vm.provider :virtualbox do |v|
-        v.name = "shopware.local"
+        v.name = "shopware640.local"
         v.memory = "4096"
         v.cpus = 2
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]

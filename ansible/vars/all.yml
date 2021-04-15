@@ -1,5 +1,5 @@
 ---
 proxy_enabled: no
-proxy_hostname: shopware.local
+proxy_hostname: shopware640.local
 proxy_ssl: no
 shopware_version: trunk
